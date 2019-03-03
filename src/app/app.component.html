@@ -1,7 +1,14 @@
-<h2>hello</h2>
-<div>
+<div>my list of items :
   <span *ngFor="let item of fruits"> {{item.title}} </span>
 </div>
+<hr>
 <app-buttons [array]="fruits" (clickButton)="getDataFun($event)"></app-buttons>
-<h3 *ngIf="basket">item {{basket}}</h3>
-<h3 *ngIf="total">total: {{total}}</h3>
+<h3 *ngIf="basket">item: {{basket}}</h3>
+<h3 *ngIf="total">price of item: {{total}}</h3>
+<h3 *ngIf="countBasket.length">my total basket:
+  <span *ngFor="let item of countBasket">
+    {{item}}
+  </span>
+</h3>
+<h3 *ngIf="amount"> count of items in the basket: {{amount}}</h3>
+<h3 *ngIf="totalPrice">my total price: {{totalPrice}}</h3>
