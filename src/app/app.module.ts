@@ -4,11 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonsComponent } from './buttons/buttons.component';
+import { MenuComponent } from './menu/menu.component';
+import { BasketComponent } from './basket/basket.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    MenuComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,
