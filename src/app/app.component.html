@@ -1,20 +1,59 @@
-<div>my list of items :
-  <span *ngFor="let item of fruits"> {{item.title}} </span>
-</div>
-<hr>
-<app-buttons [array]="fruits" (clickButton)="getDataFun($event)"></app-buttons>
-<h3 *ngIf="basket">item: {{basket}}</h3>
-<h3 *ngIf="total">price of item: {{total}}</h3>
-<h3 *ngIf="countBasket.length">my total basket:
-  <span *ngFor="let item of countBasket">
-    {{item}}
-  </span>
-</h3>
-<h3 *ngIf="amount"> count of items in the basket: {{amount}}</h3>
-<h3 *ngIf="totalPrice">my total price: {{totalPrice}}</h3>
-<br>
-<a routerLink="/menu">menu</a>
-<br>
-<a routerLink="/basket"> basket</a>
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>My First Web Site</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon" [matMenuTriggerFor]="nav">menu</mat-icon>
+      <mat-menu #nav="matMenu">
+        <button mat-menu-item>Home</button>
+        <button mat-menu-item>About</button>
+        <button mat-menu-item>Contact us</button>
+      </mat-menu>
 
-<router-outlet></router-outlet>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <h3>Menu </h3>
+
+
+  <mat-card *ngFor="let item of menu | keyvalue">
+    <div class="card-content">
+      <div>
+        {{item.value.title}} price {{item.value.price}}
+      </div>
+      <div class="example-button-row">
+        <app-counter (countChange)="addItemToBasket(item.key,$event)"></app-counter>
+        <!-- <button mat-flat-button color="primary" (click)='addItemToBasket(item.key)' ion-button>Add</button>
+        <button mat-flat-button color="primary" (click)='removeItemFromBasket(item.key)' ion-button>Remove</button> -->
+      </div>
+    </div>
+
+  </mat-card>
+
+
+
+
+  <!--
+      <div>my list of items :
+        <span *ngFor=" let item of fruits"> {{item.title}} </span>
+      </div>
+      <hr>
+      <app-buttons [array]="fruits" (clickButton)="getDataFun($event)"></app-buttons>
+      <h3 *ngIf="basket">item: {{basket}}</h3>
+      <h3 *ngIf="total">price of item: {{total}}</h3>
+      <h3 *ngIf="countBasket.length">my total basket:
+        <span *ngFor="let item of countBasket">
+          {{item}}
+        </span>
+      </h3>
+      <h3 *ngIf="amount"> count of items in the basket: {{amount}}</h3>
+      <h3 *ngIf="totalPrice">my total price: {{totalPrice}}</h3>
+      <br>
+      -->
+  <a routerLink="/menu">menu</a>
+  <br>
+  <a routerLink="/basket"> basket</a>
+
+  <router-outlet></router-outlet>
+</div>

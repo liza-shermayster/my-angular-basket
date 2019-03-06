@@ -6,6 +6,13 @@ import { AppComponent } from './app.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { MenuComponent } from './menu/menu.component';
 import { BasketComponent } from './basket/basket.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material';
+import { CommonModule } from '@angular/common';
+import { CounterComponent } from './counter/counter.component';
+import { MatButtonModule } from '@angular/material/button';
+
+
 
 
 @NgModule({
@@ -13,13 +20,19 @@ import { BasketComponent } from './basket/basket.component';
     AppComponent,
     ButtonsComponent,
     MenuComponent,
-    BasketComponent
+    BasketComponent,
+    CounterComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
