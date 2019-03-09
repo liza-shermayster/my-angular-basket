@@ -4,10 +4,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-counter',
   template: `
+  <div>
   <button mat-button (click)= "addToCounter()">+</button>
   {{this.count}}
   <button mat-button [disabled]="count===0" (click)="removeFromCounter()">-</button>
-
+</div>
   `,
   styleUrls: ['./counter.component.css']
 })

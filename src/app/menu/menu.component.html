@@ -1,3 +1,18 @@
-<p>
-  menu works!
-</p>
+<h3>Menu </h3>
+<div *ngIf="menu">
+  <mat-card *ngFor="let item of menu | keyvalue">
+    <div class="card-content">
+      <div>
+        {{item.value.title}} price {{item.value.price}}
+      </div>
+      <div class="example-button-row">
+        <app-counter (countChange)="addItemToBasket(item.key,$event)"></app-counter>
+      </div>
+    </div>
+  </mat-card>
+
+</div>
+<br>
+<div class="example-button-row">
+  <button routerLink="/basket" mat-raised-button color="primary">go to basket</button>
+</div>
