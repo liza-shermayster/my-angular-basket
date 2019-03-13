@@ -1,38 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Menu } from '../menu';
+import { Menu, Basket, MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
-import { pipe } from 'rxjs';
+import { pipe, Observable } from 'rxjs';
+import { BasketService } from '../basket.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
-  menu: Menu;
+export class MenuComponent {
+  menu: Observable<Menu>;
 
-  constructor(private menuService: MenuService) { }
-
-  ngOnInit() {
-    const savedMenu = window.sessionStorage.getItem("menu");
-    if (savedMenu) {
-      console.log('from storage');
-
-      this.menu = JSON.parse(savedMenu);
-      return;
-    }
-    this.menuService.getMenuData()
-      .subscribe(
-        res => {
-          debugger;
-          console.log('from service');
-          this.menu = res;
-          window.sessionStorage.setItem("menu", JSON.stringify(res));
-        }
-      )
+  constructor(private menuService: MenuService, private basketService: BasketService) {
+    this.menu = this.menuService.getMenuData();
   }
-  addItemToBasket(menuItemKey, amount) {
-    console.log(menuItemKey, ":", amount);
+
+  addItemToBasket(menuItem: MenuItem, amount: number, menuItemKey: string) {
+    console.log(menuItemKey, ':', amount);
+    this.basketService.updateBasket({ ...menuItem, amount }, menuItemKey);
   }
+  addBasket() {
+
+  }
+  // addItemToBasket(key: string, amount = 1): any {
+  //   if(amount === 0) {
+  //     delete this.myBasket[key];
+  //   }
+  //   this.myBasket[key] = { ...this.menu[key], amount };
+  //   console.log(this.myBasket);
+
+  // }
 
 }

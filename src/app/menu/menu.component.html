@@ -1,12 +1,19 @@
 <h3>Menu </h3>
 <div *ngIf="menu">
-  <mat-card *ngFor="let item of menu | keyvalue">
+  <!--
+    1.get our menu object from menu service
+    2.function keyvalue change object to array
+    3.async
+
+  -->
+  <mat-card *ngFor="let item of menu | async | keyvalue">
     <div class="card-content">
       <div>
         {{item.value.title}} price {{item.value.price}}
       </div>
       <div class="example-button-row">
-        <app-counter (countChange)="addItemToBasket(item.key,$event)"></app-counter>
+        <!--take data from counter component,activated by function addToBasket -->
+        <app-counter (countChange)="addItemToBasket(item.value,$event, item.key)"></app-counter>
       </div>
     </div>
   </mat-card>

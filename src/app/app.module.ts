@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ButtonsComponent } from './buttons/buttons.component';
+
 import { MenuComponent } from './menu/menu.component';
 import { BasketComponent } from './basket/basket.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,16 +13,20 @@ import { CounterComponent } from './counter/counter.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
+import { ContactUsComponent } from './contact-us/contact-us.component';
+
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ButtonsComponent,
     MenuComponent,
     BasketComponent,
-    CounterComponent
+    CounterComponent,
+    ContactUsComponent
+
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,10 @@ import { MatListModule } from '@angular/material/list';
     BrowserAnimationsModule,
     MaterialModule,
     MatButtonModule,
-    MatListModule
+    MatListModule,
+
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

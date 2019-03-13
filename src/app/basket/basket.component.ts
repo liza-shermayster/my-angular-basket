@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BasketItem, Basket } from '../menu';
+import { BasketService } from '../basket.service';
 
 @Component({
   selector: 'app-basket',
@@ -7,16 +8,14 @@ import { BasketItem, Basket } from '../menu';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent {
-  constructor() { }
-  basket: Basket = {
-    apple: { title: 'apple', price: 1, amount: 0 },
-    banana: { title: 'banana', price: 2, amount: 0 },
-    mango: { title: 'mango', price: 3, amount: 0 },
-    avocado: { title: 'avocado', price: 4, amount: 0 },
-    blueberries: { title: 'blueberries', price: 5, amount: 0 },
+  basket;
+  subs;
+  constructor(private basketService: BasketService) {
+    this.basket = this.basketService.getBasketData();
 
-  };
-  addItemToBasket(menuItemKey, amount) {
-    console.log(menuItemKey, ":", amount);
+  }
+
+  addItemToBasket(menuItemKey, amount, itemValue) {
+    console.log(menuItemKey, ':', amount, itemValue);
   }
 }
