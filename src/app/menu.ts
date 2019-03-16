@@ -15,5 +15,5 @@ export interface BasketItem extends MenuItem {
 
 
 export interface Basket {
-  [key: string]: BasketItem;
+  [key: string]: BasketItem | MenuItem;
 }

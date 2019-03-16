@@ -1,0 +1,16 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.example-container > * {
+  width: 100%;
+}
+.contact{
+  margin-top: 40px;
+}
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}

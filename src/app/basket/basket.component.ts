@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BasketItem, Basket } from '../menu';
 import { BasketService } from '../basket.service';
+import { del } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-basket',
@@ -16,6 +17,7 @@ export class BasketComponent {
   }
 
   addItemToBasket(menuItemKey, amount, itemValue) {
+
     console.log(menuItemKey, ':', amount, itemValue);
   }
 }

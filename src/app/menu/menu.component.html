@@ -1,19 +1,20 @@
 <h3>Menu </h3>
-<div *ngIf="menu">
+<div *ngIf="basketSubj | async">
   <!--
     1.get our menu object from menu service
     2.function keyvalue change object to array
-    3.async
+    3.async make subscription in template
 
   -->
-  <mat-card *ngFor="let item of menu | async | keyvalue">
+  <mat-card *ngFor="let item of basketSubj | async | keyvalue">
     <div class="card-content">
       <div>
         {{item.value.title}} price {{item.value.price}}
       </div>
       <div class="example-button-row">
         <!--take data from counter component,activated by function addToBasket -->
-        <app-counter (countChange)="addItemToBasket(item.value,$event, item.key)"></app-counter>
+        <app-counter [count]="item.value.amount || 0" (countChange)="addItemToBasket(item.value,$event, item.key)">
+        </app-counter>
       </div>
     </div>
   </mat-card>
@@ -22,4 +23,15 @@
 <br>
 <div class="example-button-row">
   <button routerLink="/basket" mat-raised-button color="primary">go to basket</button>
+</div>
+
+<div *ngIf='basketSubj |async'>
+
+  <mat-card class="card-content" *ngFor="let item of basketSubj | async | keyvalue">
+    <h4>{{item.value.title}} </h4>
+    <div class="example-button-row">
+      <app-counter [count]="item.value.amount || 0" (countChange)="addItemToBasket(item.key,$event,item.value)">
+      </app-counter>
+    </div>
+  </mat-card>
 </div>

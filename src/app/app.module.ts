@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -25,7 +28,9 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     MenuComponent,
     BasketComponent,
     CounterComponent,
-    ContactUsComponent
+    ContactUsComponent,
+
+
 
   ],
   imports: [
@@ -36,6 +41,13 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     MaterialModule,
     MatButtonModule,
     MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
+
+
+
 
 
 

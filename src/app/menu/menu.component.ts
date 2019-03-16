@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu, Basket, MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
-import { pipe, Observable } from 'rxjs';
+import { pipe, Observable, BehaviorSubject } from 'rxjs';
 import { BasketService } from '../basket.service';
 
 @Component({
@@ -11,18 +11,28 @@ import { BasketService } from '../basket.service';
 })
 export class MenuComponent {
   menu: Observable<Menu>;
+  basketSubj: BehaviorSubject<Basket>;
 
   constructor(private menuService: MenuService, private basketService: BasketService) {
-    this.menu = this.menuService.getMenuData();
+    this.basketSubj = this.basketService.getBasketData();
+    this.menuService.getMenuData().subscribe((value) => {
+      if (!this.basketSubj.value) {
+        this.basketSubj.next(value);
+
+      }
+    });
   }
 
   addItemToBasket(menuItem: MenuItem, amount: number, menuItemKey: string) {
     console.log(menuItemKey, ':', amount);
     this.basketService.updateBasket({ ...menuItem, amount }, menuItemKey);
   }
-  addBasket() {
 
-  }
+
+
+  // addBasket() {
+
+  // }
   // addItemToBasket(key: string, amount = 1): any {
   //   if(amount === 0) {
   //     delete this.myBasket[key];
