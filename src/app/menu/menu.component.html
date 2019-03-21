@@ -1,4 +1,16 @@
 <h3>Menu </h3>
+
+
+<mat-form-field class="example-form-field">
+  <input matInput type="text" placeholder="search" [(ngModel)]="searchValue">
+  <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+
+
+
 <div *ngIf="basketSubj | async">
   <!--
     1.get our menu object from menu service
@@ -6,7 +18,7 @@
     3.async make subscription in template
 
   -->
-  <mat-card *ngFor="let item of basketSubj | async | keyvalue">
+  <mat-card *ngFor="let item of basketSubj | async | keyvalue | search: searchValue">
     <div class="card-content">
       <div>
         {{item.value.title}} price {{item.value.price}}

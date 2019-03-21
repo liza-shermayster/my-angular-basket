@@ -12,6 +12,7 @@ import { BasketService } from '../basket.service';
 export class MenuComponent {
   menu: Observable<Menu>;
   basketSubj: BehaviorSubject<Basket>;
+  searchValue = '';
 
   constructor(private menuService: MenuService, private basketService: BasketService) {
     this.basketSubj = this.basketService.getBasketData();

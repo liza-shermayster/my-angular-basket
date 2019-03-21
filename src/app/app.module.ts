@@ -16,6 +16,9 @@ import { MatListModule } from '@angular/material/list';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchPipe } from './menu/search.pipe';
+
+
 
 
 
@@ -29,6 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BasketComponent,
     CounterComponent,
     ContactUsComponent,
+    SearchPipe,
+
 
 
 
