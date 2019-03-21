@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+
 
 
 
@@ -8,15 +9,27 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent {
-
-
-  email = new FormControl('', [Validators.required, Validators.email]);
+export class ContactUsComponent implements OnInit {
+  singUpForm: FormGroup;
   constructor() { }
 
+
+  ngOnInit() {
+    this.singUpForm = new FormGroup({
+      userName: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      message: new FormControl('')
+
+    });
+  }
+
   getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
+    return this.singUpForm.controls.email.hasError('required') ? 'You must enter a value' :
+      this.singUpForm.controls.email.hasError('email') ? 'Not a valid email' :
         '';
   }
+  onSubmit() {
+    console.log(this.singUpForm.value);
+  }
 }
+

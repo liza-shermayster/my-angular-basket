@@ -26,7 +26,6 @@
 </div>
 
 <div *ngIf='basketSubj |async'>
-
   <mat-card class="card-content" *ngFor="let item of basketSubj | async | keyvalue">
     <h4>{{item.value.title}} </h4>
     <div class="example-button-row">

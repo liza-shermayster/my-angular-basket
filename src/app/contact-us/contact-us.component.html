@@ -1,20 +1,30 @@
-<div class="contact">Contact Us
-  <div class="example-container">
-    <mat-form-field>
-      <input matInput placeholder="Your name">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Enter your email" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-    </mat-form-field>
+<mat-card>
+  <div class="contact">Contact Us
+    <form [formGroup]="singUpForm" (ngSubmit)="onSubmit()">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="Your name" formControlName="userName">
+          <mat-error *ngIf="!singUpForm.get('userName').valid && singUpForm.get('userName').touched">
+            Please enter your name
+          </mat-error>
+        </mat-form-field>
+        <br>
 
-    <mat-form-field>
-      <textarea matInput placeholder="Your Message"></textarea>
-    </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Enter your email" formControlName="email">
+          <mat-error>{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
 
+        <br>
+        <mat-form-field>
+          <textarea matInput placeholder="Your Message" formControlName="message"></textarea>
+        </mat-form-field>
 
+        <br>
+      </div>
+      <div class="example-button-row">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!singUpForm.valid">Submit</button>
+      </div>
+    </form>
   </div>
-  <div class="example-button-row">
-    <button type="submit" mat-raised-button color="primary">Submit</button>
-  </div>
-</div>
+</mat-card>

@@ -15,7 +15,7 @@ import { MatListModule } from '@angular/material/list';
 
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
