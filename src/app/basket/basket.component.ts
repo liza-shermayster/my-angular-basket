@@ -16,8 +16,9 @@ export class BasketComponent {
 
   }
 
-  addItemToBasket(menuItemKey, amount, itemValue) {
+  addItemToBasket(menuItemKey: string, amount: number, itemValue) {
 
     console.log(menuItemKey, ':', amount, itemValue);
+    this.basketService.updateBasket({ ...itemValue, amount }, menuItemKey);
   }
 }

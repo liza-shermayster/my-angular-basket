@@ -36,3 +36,7 @@ mat-card+mat-card {
 .example-form-field {
   width: 200px;
 }
+.desc{
+  height: 40px;
+  line-height: 40px;
+}

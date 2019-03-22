@@ -17,12 +17,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
-
-
-
-
-
-
+import { FilterBasketPipe } from './basket/filter-basket.pipe';
 
 
 @NgModule({
@@ -33,10 +28,7 @@ import { SearchPipe } from './menu/search.pipe';
     CounterComponent,
     ContactUsComponent,
     SearchPipe,
-
-
-
-
+    FilterBasketPipe
   ],
   imports: [
     CommonModule,
@@ -50,12 +42,6 @@ import { SearchPipe } from './menu/search.pipe';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule
-
-
-
-
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,7 +20,7 @@
   -->
   <mat-card *ngFor="let item of basketSubj | async | keyvalue | search: searchValue">
     <div class="card-content">
-      <div>
+      <div class="desc">
         {{item.value.title}} price {{item.value.price}}
       </div>
       <div class="example-button-row">
@@ -35,14 +35,4 @@
 <br>
 <div class="example-button-row">
   <button routerLink="/basket" mat-raised-button color="primary">go to basket</button>
-</div>
-
-<div *ngIf='basketSubj |async'>
-  <mat-card class="card-content" *ngFor="let item of basketSubj | async | keyvalue">
-    <h4>{{item.value.title}} </h4>
-    <div class="example-button-row">
-      <app-counter [count]="item.value.amount || 0" (countChange)="addItemToBasket(item.key,$event,item.value)">
-      </app-counter>
-    </div>
-  </mat-card>
 </div>

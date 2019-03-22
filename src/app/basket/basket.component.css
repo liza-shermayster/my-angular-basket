@@ -33,7 +33,6 @@ mat-card+mat-card {
   display: flex;
   justify-content: space-between;
 }
-.amount{
-  display: flex;
-  margin-left: 20px;
+.example-form-field {
+  width: 200px;
 }
