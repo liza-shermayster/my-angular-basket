@@ -19,7 +19,7 @@ export class SearchPipe implements PipeTransform {
     }
 
     return value.filter(item => {
-      console.log(item.value.title.includes(searchText))
+      console.log(item.value.title.includes(searchText));
       return item.value.title.toLowerCase().includes(searchText.toLowerCase());
     });
 

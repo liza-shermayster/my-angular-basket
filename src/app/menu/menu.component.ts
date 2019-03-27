@@ -13,13 +13,14 @@ export class MenuComponent {
   menu: Observable<Menu>;
   basketSubj: BehaviorSubject<Basket>;
   searchValue = '';
+  total: Observable<number>;
 
   constructor(private menuService: MenuService, private basketService: BasketService) {
     this.basketSubj = this.basketService.getBasketData();
+    this.total = this.basketService.getTotalPrice();
     this.menuService.getMenuData().subscribe((value) => {
       if (!this.basketSubj.value) {
         this.basketSubj.next(value);
-
       }
     });
   }

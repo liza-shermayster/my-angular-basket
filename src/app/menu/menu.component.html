@@ -30,9 +30,10 @@
       </div>
     </div>
   </mat-card>
+  <div>Total {{total | async}}</div>
 
 </div>
 <br>
 <div class="example-button-row">
-  <button routerLink="/basket" mat-raised-button color="primary">go to basket</button>
+  <button routerLink="/basket" mat-raised-button color="primary" [disabled]="(total |async) ===0">go to basket</button>
 </div>

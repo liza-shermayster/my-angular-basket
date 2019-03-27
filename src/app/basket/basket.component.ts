@@ -11,8 +11,10 @@ import { del } from 'selenium-webdriver/http';
 export class BasketComponent {
   basket;
   subs;
+  total;
   constructor(private basketService: BasketService) {
     this.basket = this.basketService.getBasketData();
+    this.total = this.basketService.getTotalPrice();
 
   }
 
