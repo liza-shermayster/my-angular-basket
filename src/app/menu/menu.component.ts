@@ -3,6 +3,8 @@ import { Menu, Basket, MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
 import { pipe, Observable, BehaviorSubject } from 'rxjs';
 import { BasketService } from '../basket.service';
+import { PageEvent } from '@angular/material';
+
 
 @Component({
   selector: 'app-menu',
@@ -14,6 +16,8 @@ export class MenuComponent {
   basketSubj: BehaviorSubject<Basket>;
   searchValue = '';
   total: Observable<number>;
+
+
 
   constructor(private menuService: MenuService, private basketService: BasketService) {
     this.basketSubj = this.basketService.getBasketData();
@@ -29,19 +33,4 @@ export class MenuComponent {
     console.log(menuItemKey, ':', amount);
     this.basketService.updateBasket({ ...menuItem, amount }, menuItemKey);
   }
-
-
-
-  // addBasket() {
-
-  // }
-  // addItemToBasket(key: string, amount = 1): any {
-  //   if(amount === 0) {
-  //     delete this.myBasket[key];
-  //   }
-  //   this.myBasket[key] = { ...this.menu[key], amount };
-  //   console.log(this.myBasket);
-
-  // }
-
 }

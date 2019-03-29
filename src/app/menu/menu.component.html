@@ -18,8 +18,10 @@
     3.async make subscription in template
 
   -->
-  <mat-card *ngFor="let item of basketSubj | async | keyvalue | search: searchValue">
-    <div class="card-content">
+  <mat-card
+    *ngFor="let item of basketSubj | async | keyvalue | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }">
+    <img class="item-img" [src]="item.value.img" />
+    <div class=" card-content">
       <div class="desc">
         {{item.value.title}} price {{item.value.price}}
       </div>
@@ -30,10 +32,14 @@
       </div>
     </div>
   </mat-card>
-  <div>Total {{total | async}}</div>
+  <div>
+    Total {{total | async}}
+  </div>
+  <div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 
-</div>
-<br>
-<div class="example-button-row">
-  <button routerLink="/basket" mat-raised-button color="primary" [disabled]="(total |async) ===0">go to basket</button>
-</div>
+  <div class="example-button-row">
+    <button routerLink="/basket" mat-raised-button color="primary" [disabled]="(total |async) ===0">go to
+      basket</button>
+  </div>

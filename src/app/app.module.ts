@@ -18,6 +18,9 @@ import { MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { FilterBasketPipe } from './basket/filter-basket.pipe';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

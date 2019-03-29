@@ -2,6 +2,7 @@ export interface MenuItem {
   title: string;
   price: number;
   description?: string;
+  img: any;
 }
 
 export interface Menu {
