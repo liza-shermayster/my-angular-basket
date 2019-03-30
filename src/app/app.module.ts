@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DescriptionComponent } from './description/description.component';
 
 
 
@@ -31,7 +32,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CounterComponent,
     ContactUsComponent,
     SearchPipe,
-    FilterBasketPipe
+    FilterBasketPipe,
+    DescriptionComponent
   ],
   imports: [
     CommonModule,
