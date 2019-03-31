@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Basket, BasketItem } from './menu';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { map } from 'rxjs/operators';
+import { MenuService } from './menu.service';
 
 
 
@@ -10,6 +11,12 @@ import { map } from 'rxjs/operators';
 })
 export class BasketService {
   basketSubject = new BehaviorSubject<Basket>(null);
+
+  constructor(private menuService: MenuService) {
+    this.menuService.getMenuData().subscribe((value) => {
+      this.basketSubject.next(value);
+    });
+  }
 
   getBasketData() {
     return this.basketSubject;

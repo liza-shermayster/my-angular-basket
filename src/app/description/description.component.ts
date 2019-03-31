@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../basket.service';
-import { MenuService } from '../menu.service';
 import { Basket, BasketItem, MenuItem } from '../menu';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-description',
@@ -9,20 +9,24 @@ import { Basket, BasketItem, MenuItem } from '../menu';
   styleUrls: ['./description.component.css']
 })
 export class DescriptionComponent implements OnInit {
-  descItem;
+  obserBasketData;
+  itemKey: string;
   itemData: BasketItem | MenuItem;
 
-  constructor(private serviceData: BasketService) {
-    this.descItem = this.serviceData.getBasketData().subscribe(this.onBasketItem);
+  constructor(private serviceData: BasketService, private route: ActivatedRoute) {
+    this.obserBasketData = this.serviceData.getBasketData();
+  }
+
+  ngOnInit() {
+    this.itemKey = this.route.snapshot.params['item'];
+    this.obserBasketData.subscribe(this.onBasketItem);
   }
 
   onBasketItem = (data: Basket) => {
     console.log(data);
-    if (data) {
-      this.itemData = data['apple'];
+    if (data && this.itemKey) {
+      this.itemData = data[this.itemKey];
     }
-  }
-  ngOnInit() {
   }
 
 }
