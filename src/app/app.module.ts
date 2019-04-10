@@ -20,6 +20,7 @@ import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DescriptionComponent } from './description/description.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -47,7 +48,8 @@ import { DescriptionComponent } from './description/description.component';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

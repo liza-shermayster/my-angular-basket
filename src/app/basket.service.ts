@@ -13,7 +13,7 @@ export class BasketService {
   basketSubject = new BehaviorSubject<Basket>(null);
 
   constructor(private menuService: MenuService) {
-    this.menuService.getMenuData().subscribe((value) => {
+    this.menuService.getMenuData().subscribe((value: Basket) => {
       this.basketSubject.next(value);
     });
   }

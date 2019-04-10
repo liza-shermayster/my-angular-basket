@@ -24,12 +24,13 @@ export class ContactUsComponent implements OnInit {
   }
 
   getErrorMessage() {
-    return this.singUpForm.controls.email.hasError('required') ? 'You must enter a value' :
+    return this.singUpForm.controls.email.hasError('required') ? ' Please enter your email' :
       this.singUpForm.controls.email.hasError('email') ? 'Not a valid email' :
         '';
   }
   onSubmit() {
     console.log(this.singUpForm.value);
+
   }
 }
 
