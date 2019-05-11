@@ -22,6 +22,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DescriptionComponent } from './description/description.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SingUpComponent } from './auth/singUp/singUp.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoginComponent } from './auth/login /login.component';
+
 
 
 
@@ -34,7 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     ContactUsComponent,
     SearchPipe,
     FilterBasketPipe,
-    DescriptionComponent
+    DescriptionComponent,
+    LoginComponent,
+    SingUpComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

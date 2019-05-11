@@ -7,7 +7,7 @@ type PipeValue = { key: string, value: BasketItem }
 })
 export class FilterBasketPipe implements PipeTransform {
 
-  transform(basketItems: PipeValue[]): PipeValue[] {
+  transform(basketItems) {
     if (basketItems) {
       /**
        * @desc function filter creates new array
@@ -16,7 +16,7 @@ export class FilterBasketPipe implements PipeTransform {
       return basketItems.filter(item => {
         console.log(item);
         // if amount exist or grater than 0
-        if (item.value.amount) {
+        if (item.amount) {
           return true;
         }
         return false;

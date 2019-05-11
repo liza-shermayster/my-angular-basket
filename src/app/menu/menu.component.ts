@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu, Basket, MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
-import { pipe, Observable, BehaviorSubject } from 'rxjs';
 import { BasketService } from '../basket.service';
 import { PageEvent } from '@angular/material';
 
@@ -12,20 +11,35 @@ import { PageEvent } from '@angular/material';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  menu: Observable<Menu>;
-  basketSubj: BehaviorSubject<Basket>;
+  menu: MenuItem[];
   searchValue = '';
-  total: Observable<number>;
+
 
 
 
   constructor(private basketService: BasketService) {
-    this.basketSubj = this.basketService.getBasketData();
-    this.total = this.basketService.getTotalPrice();
+    this.basketService.getBasketData().subscribe((data) => {
+      console.log('data', data);
+      this.menu = data;
+    });
+
+    // this.total = this.basketService.getTotalPrice();
   }
 
-  addItemToBasket(menuItem: MenuItem, amount: number, menuItemKey: string) {
-    console.log(menuItemKey, ':', amount);
-    this.basketService.updateBasket({ ...menuItem, amount }, menuItemKey);
+  addItemToBasket(item, amount) {
+    console.log('amount item from menu com', amount);
+    console.log('menu item from menu com', item);
+    for (const x of this.menu) {
+
+      if (item._id === x._id) {
+        x.amount = amount;
+      }
+    }
+    console.log('this menu', this.menu);
+    this.basketService.updateBasket(this.menu);
+    // this.basketService.updateBasket({ ...item, ...amount });
   }
+
+
+
 }

@@ -1,40 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Basket, BasketItem } from './menu';
+import { Basket, BasketItem, MenuItem } from './menu';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { MenuService } from './menu.service';
-
+import { element } from '@angular/core/src/render3';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  basketSubject = new BehaviorSubject<Basket>(null);
+  menuData;
+  basketSubject = new BehaviorSubject<MenuItem[]>(null);
 
-  constructor(private menuService: MenuService) {
-    this.menuService.getMenuData().subscribe((value: Basket) => {
-      this.basketSubject.next(value);
-    });
+
+  constructor(private http: HttpClient) {
+    this.http.get('http://localhost:3000/api/menu').pipe(
+      map((data: { message: string, menuItems: MenuItem[] }) => {
+        return data.menuItems;
+      }))
+      .subscribe((value: MenuItem[]) => {
+        this.menuData = value;
+        console.log('menuData-0', value);
+        this.basketSubject.next([...this.menuData]);
+      });
   }
 
   getBasketData() {
-    return this.basketSubject;
+    console.log('thisBasketSubject', this.basketSubject);
+    return this.basketSubject.asObservable();
   }
 
-  updateBasket(item: BasketItem, basketKey: string) {
-    const newBasketItem = this.getNewBasketItem(item, basketKey);
-    const currentBasket = this.basketSubject.value;
-    const updatedBasket = { ...currentBasket, ...newBasketItem };
 
-    this.basketSubject.next(updatedBasket);
-  }
+  updateBasket(item: MenuItem[]) {
+    const newBasketItem = item;
+    // const currentBasket = this.basketSubject.value;
+    // const updatedBasket = { ...currentBasket, ...newBasketItem };
 
-  getNewBasketItem(item: BasketItem, basketKey: string) {
-    const newBasketItem = {};
-    newBasketItem[basketKey] = item;
-    return newBasketItem;
+    this.basketSubject.next(newBasketItem);
   }
+  /////////////////////////////////////////////////////
+  // getNewBasketItem(item: MenuItem[], ) {
+  //   const newBasketItem = {};
+  //   // newBasketItem[basketKey] = item;
+  //   return newBasketItem;
+  // }
 
   getTotalPrice() {
     return this.basketSubject.pipe(map((this.getTotal)));

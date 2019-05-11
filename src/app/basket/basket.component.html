@@ -1,19 +1,24 @@
 <h2 mat-subheader>Basket </h2>
 
+
 <!-- async do subscribe and unsubscribe  automatically-->
-<mat-card *ngFor="let item of basket | async | keyvalue | filterBasket">
+<mat-card *ngFor="let item of menu | filterBasket ">
+
   <div class="card-content">
-    <div>{{item.value.title}} </div>
+    <div>{{item.title}} </div>
 
     <div class="example-button-row">
-      <app-counter [count]="item.value.amount || 0" (countChange)="addItemToBasket(item.key,$event,item.value)">
+      <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
       </app-counter>
     </div>
   </div>
+
 </mat-card>
+
 
 
 <br>
 <div class="example-button-row">
   <button routerLink="/menu" mat-raised-button color="primary">go to home page</button>
+
 </div>

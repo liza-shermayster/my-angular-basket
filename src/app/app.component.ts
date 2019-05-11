@@ -9,22 +9,4 @@ import { Component, Input } from '@angular/core';
 })
 
 export class AppComponent {
-
-  // addItemToBasket(key: string, amount = 1): any {
-  //   if(amount === 0) {
-  //     delete this.myBasket[key];
-  //   }
-  //   this.myBasket[key] = { ...this.menu[key], amount };
-  //   console.log(this.myBasket);
-
-  // }
-
-
-
-
-
-
-
-
-
 }

@@ -11,31 +11,29 @@
 
 
 
-<div *ngIf="basketSubj | async">
+<div *ngIf="menu">
   <!--
     1.get our menu object from menu service
     2.function keyvalue change object to array
     3.async make subscription in template
 
   -->
-  <mat-card
-    *ngFor="let item of basketSubj | async | keyvalue | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }">
-    <img class="item-img" [src]="item.value.img" />
+  <mat-card *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }">
+    <img class="item-img" [src]="item.img" />
     <div class=" card-content">
       <div class="desc">
-        {{item.value.title}} price {{item.value.price}}
+        title {{item.title}}
+        price {{item.price}}
         <a routerLink="/description">Item Description</a>
       </div>
       <div class="example-button-row">
         <!--take data from counter component,activated by function addToBasket -->
-        <app-counter [count]="item.value.amount || 0" (countChange)="addItemToBasket(item.value,$event, item.key)">
+        <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
         </app-counter>
       </div>
     </div>
   </mat-card>
-  <div>
-    Total {{total | async}}
-  </div>
+
   <div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>

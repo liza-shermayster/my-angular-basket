@@ -3,13 +3,14 @@
     <mat-toolbar-row>
       <span>My First Web Site</span>
       <span class="example-spacer"></span>
+      <a mat-button routerLink="/login">Login</a>
+      <a mat-button routerLink="/singUp">Sign up</a>
       <mat-icon class="example-icon" [matMenuTriggerFor]="nav">menu</mat-icon>
       <mat-menu #nav="matMenu">
         <button routerLink="/menu" mat-menu-item>Home</button>
         <button routerLink="/basket" mat-menu-item>About</button>
         <button routerLink="/contact" mat-menu-item>Contact us</button>
       </mat-menu>
-
     </mat-toolbar-row>
   </mat-toolbar>
   <router-outlet></router-outlet>

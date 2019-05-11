@@ -1,8 +1,10 @@
 export interface MenuItem {
+  _id: string;
   title: string;
   price: number;
   description?: string;
-  img: any;
+  img: string;
+  amount?: number;
 }
 
 export interface Menu {

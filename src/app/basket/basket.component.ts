@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BasketItem, Basket } from '../menu';
+import { BasketItem, Basket, MenuItem } from '../menu';
 import { BasketService } from '../basket.service';
 import { del } from 'selenium-webdriver/http';
 
@@ -9,18 +9,45 @@ import { del } from 'selenium-webdriver/http';
   styleUrls: ['./basket.component.css']
 })
 export class BasketComponent {
-  basket;
-  subs;
-  total;
+  menu: MenuItem[];
   constructor(private basketService: BasketService) {
-    this.basket = this.basketService.getBasketData();
-    this.total = this.basketService.getTotalPrice();
+    this.basketService.getBasketData().subscribe((data) => {
+      console.log('data', data);
+      this.menu = data;
+    });
 
+    // this.total = this.basketService.getTotalPrice();
   }
 
-  addItemToBasket(menuItemKey: string, amount: number, itemValue) {
+  addItemToBasket(item, amount) {
+    console.log('amount item from menu com', amount);
+    console.log('menu item from menu com', item);
+    for (const x of this.menu) {
 
-    console.log(menuItemKey, ':', amount, itemValue);
-    this.basketService.updateBasket({ ...itemValue, amount }, menuItemKey);
+      if (item._id === x._id) {
+        x.amount = amount;
+      }
+    }
+    console.log('this menu', this.menu);
+    this.basketService.updateBasket(this.menu);
+    // this.basketService.updateBasket({ ...item, ...amount });
   }
+
+
+
+  /////////////////////////////////////////////////////////////////
+  // basket;
+  // subs;
+  // total;
+  // constructor(private basketService: BasketService) {
+  //   this.basket = this.basketService.getBasketData().subscribe();
+  //   this.total = this.basketService.getTotalPrice();
+
+  // }
+
+  // // addItemToBasket(menuItemKey: string, amount: number, itemValue) {
+
+  // //   console.log(menuItemKey, ':', amount, itemValue);
+  // //   this.basketService.updateBasket({ ...itemValue, amount }, menuItemKey);
+  // // }
 }
