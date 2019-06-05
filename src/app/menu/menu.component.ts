@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Menu, Basket, MenuItem } from '../menu';
+import { MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
 import { BasketService } from '../basket.service';
 import { PageEvent } from '@angular/material';
@@ -13,30 +13,30 @@ import { PageEvent } from '@angular/material';
 export class MenuComponent {
   menu: MenuItem[];
   searchValue = '';
-
-
-
+  total;
+  addAmount;
 
   constructor(private basketService: BasketService) {
     this.basketService.getBasketData().subscribe((data) => {
-      console.log('data', data);
+
       this.menu = data;
     });
 
-    // this.total = this.basketService.getTotalPrice();
+    this.total = this.basketService.getTotalPrice();
   }
 
   addItemToBasket(item, amount) {
-    console.log('amount item from menu com', amount);
-    console.log('menu item from menu com', item);
-    for (const x of this.menu) {
+    this.basketService.updateBasket({ ...item, amount });
 
-      if (item._id === x._id) {
-        x.amount = amount;
-      }
-    }
-    console.log('this menu', this.menu);
-    this.basketService.updateBasket(this.menu);
+    // console.log('amount item from menu com', amount);
+    // console.log('menu item from menu com', item);
+    // for (const x of this.menu) {
+    //   if (item._id === x._id) {
+    //     x.amount = amount;
+    //   }
+    // }
+    // console.log('this menu', this.menu);
+    // this.basketService.updateBasket(this.menu);
     // this.basketService.updateBasket({ ...item, ...amount });
   }
 

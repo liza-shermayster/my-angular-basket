@@ -4,14 +4,15 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 // const menuItemsSchema = require('./models/menuDB')
 
-const userRouters = require("./routes/user");
-const menuRouters = require("./routes/menu");
+const userRoutes = require("./routes/user");
+const menuRoutes = require("./routes/menu");
+const orderRoutes = require("./routes/order");
 
 const app = express();
 
 
 
-mongoose.connect('mongodb+srv://lizaWrite:****.mongodb.net/node-angular?retryWrites=true')
+mongoose.connect('mongodb+srv://lizaWrite:brdHyKTJNWfUBb5@cluster0-eb692.mongodb.net/node-angular?retryWrites=true', { useNewUrlParser: true })
   .then(() => {
     console.log('Connected to database!');
   })
@@ -28,18 +29,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //cors
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH,DELETE,OPTIONS"
+    "GET, POST, PATCH,DELETE,OPTIONS,PUT"
   );
   next();
 });
 
 
-app.use('/api/user', userRouters);
-app.use('/api/menuItems', menuRouters);
+app.use('/api/user', userRoutes);
+app.use('/api/menu', menuRoutes);
+app.use('/api/order', orderRoutes);
 
 module.exports = app;
 

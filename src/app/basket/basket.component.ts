@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BasketItem, Basket, MenuItem } from '../menu';
 import { BasketService } from '../basket.service';
 import { del } from 'selenium-webdriver/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -10,13 +11,16 @@ import { del } from 'selenium-webdriver/http';
 })
 export class BasketComponent {
   menu: MenuItem[];
+  total;
+  router;
   constructor(private basketService: BasketService) {
     this.basketService.getBasketData().subscribe((data) => {
-      console.log('data', data);
+      console.log('data from basket com', data);
       this.menu = data;
+
     });
 
-    // this.total = this.basketService.getTotalPrice();
+    this.total = this.basketService.getTotalPrice();
   }
 
   addItemToBasket(item, amount) {
@@ -32,8 +36,6 @@ export class BasketComponent {
     this.basketService.updateBasket(this.menu);
     // this.basketService.updateBasket({ ...item, ...amount });
   }
-
-
 
   /////////////////////////////////////////////////////////////////
   // basket;

@@ -4,62 +4,70 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { element } from '@angular/core/src/render3';
+import { Observable } from 'rxjs';
 
-
+interface MenuResponse {
+  message: string;
+  menuItems: MenuItem[];
+}
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  menuData;
-  basketSubject = new BehaviorSubject<MenuItem[]>(null);
+  menuData = [] as MenuItem[];
+  basketSubject = new BehaviorSubject<MenuItem[]>(this.menuData);
 
+  transformResponseToMenuItems = (data: MenuResponse): MenuItem[] => {
+    return data.menuItems;
+  }
 
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:3000/api/menu').pipe(
-      map((data: { message: string, menuItems: MenuItem[] }) => {
-        return data.menuItems;
-      }))
-      .subscribe((value: MenuItem[]) => {
-        this.menuData = value;
-        console.log('menuData-0', value);
+    this.http.get('http://localhost:3000/api/menu')
+      .pipe(
+        map(this.transformResponseToMenuItems)
+      )
+      .subscribe((menuItems: MenuItem[]) => {
+        this.menuData = menuItems;
+
         this.basketSubject.next([...this.menuData]);
       });
   }
 
   getBasketData() {
-    console.log('thisBasketSubject', this.basketSubject);
     return this.basketSubject.asObservable();
   }
 
 
-  updateBasket(item: MenuItem[]) {
+  updateBasket(item) {
     const newBasketItem = item;
-    // const currentBasket = this.basketSubject.value;
-    // const updatedBasket = { ...currentBasket, ...newBasketItem };
-
-    this.basketSubject.next(newBasketItem);
-  }
-  /////////////////////////////////////////////////////
-  // getNewBasketItem(item: MenuItem[], ) {
-  //   const newBasketItem = {};
-  //   // newBasketItem[basketKey] = item;
-  //   return newBasketItem;
-  // }
-
-  getTotalPrice() {
-    return this.basketSubject.pipe(map((this.getTotal)));
-  }
-
-  getTotal(obj) {
-    let total = 0;
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        const element = obj[key];
-        if (element.amount) {
-          total = total + element.amount * element.price;
-        }
+    for (const x of this.menuData) {
+      if (x._id === newBasketItem._id) {
+        console.log('menu item id', x._id);
+        x.amount = newBasketItem.amount;
+        console.log('menu item amount', x.amount);
       }
     }
+    this.basketSubject.next([...this.menuData]);
+  }
+
+
+  getTotalPrice(): Observable<number> {
+    return this.basketSubject.pipe(map((this.getTotalFromMenuItems)));
+  }
+
+  getTotalFromMenuItems(menu: MenuItem[]): number {
+
+    console.log('obj service', menu);
+    let total = 0;
+
+    for (const x of menu) {
+      if (x.amount) {
+        total += x.amount * x.price;
+        console.log('price', x.price)
+      }
+    }
+    console.log('total', total);
+
     return total;
   }
 }

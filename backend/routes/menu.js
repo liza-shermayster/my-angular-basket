@@ -1,12 +1,15 @@
 const express = require('express');
 const menuItemsSchema = require('../models/menuDB');
 const router = express.Router();
+const checkAuth = require("../middleware/check-auth");
 
-router.post('/api/menuItems', (req, res, next) => {
+router.post('/items', (req, res, next) => {
   console.log("request title", req.body.title);
 
   const menuItem = new menuItemsSchema({
-    title: req.body.title, price: req.body.price, img: 'assets/img/apple-1589869_640.jpg'
+    title: req.body.title,
+    price: req.body.price,
+    img: 'assets/img/apple-1589869_640.jpg'
   });
   menuItem.save();
   res.status(201).json({
@@ -26,7 +29,9 @@ router.post('/api/menuItems', (req, res, next) => {
 //     console.log(err);
 //   }
 // });
-router.get('/api/menu', (req, res, next) => {
+
+router.get('/', (req, res, next) => {
+
   menuItemsSchema.find().then(documents => {
     res.status(200).json({
       message: 'Posts fetched successfully!',

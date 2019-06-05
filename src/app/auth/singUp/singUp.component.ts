@@ -2,15 +2,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './singUp.component.html',
   styleUrls: ["./singUp.component.css"],
 })
-export class SingUpComponent {
+export class SingUpComponent implements OnInit {
   singUpForm: FormGroup;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.singUpForm = new FormGroup({
@@ -25,13 +26,7 @@ export class SingUpComponent {
         '';
   }
   onSingUp(singUpForm: FormGroup) {
-
-    // if (singUpForm.invalid) {
-    //   return;
-    // }
-    this.authService.createUser(this.singUpForm.value.email, this.singUpForm.value.password);
-    console.log('data of singUpCom-email', this.singUpForm.value);
-    console.log('data of singUpCom-password', this.singUpForm.value.password);
-
+    this.authService
+      .createUser(this.singUpForm.value.email, this.singUpForm.value.password)
   }
 }

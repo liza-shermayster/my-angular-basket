@@ -20,11 +20,13 @@ import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DescriptionComponent } from './description/description.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SingUpComponent } from './auth/singUp/singUp.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginComponent } from './auth/login /login.component';
+import { OrderComponent } from './order/order.component';
+import { AuthInterceptor } from './auth/auth-iterceptor';
 
 
 
@@ -40,7 +42,8 @@ import { LoginComponent } from './auth/login /login.component';
     FilterBasketPipe,
     DescriptionComponent,
     LoginComponent,
-    SingUpComponent
+    SingUpComponent,
+    OrderComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +61,7 @@ import { LoginComponent } from './auth/login /login.component';
     HttpClientModule,
     MatProgressSpinnerModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
