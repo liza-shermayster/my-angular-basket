@@ -1,6 +1,11 @@
-.container {
+.main {
   margin: 2rem auto;
   max-width: 900px;
+}
+
+.container {
+  width: 98%;
+  margin: 0 auto;
 }
 
 .example-icon {
@@ -33,3 +38,5 @@ mat-card+mat-card {
   display: flex;
   justify-content: space-between;
 }
+
+

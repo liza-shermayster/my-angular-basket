@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const menuItemsSubSchema = {
   title: { type: String, required: true },
   price: { type: Number, required: true },
+  description: { type: String, require: true },
   img: { type: String }
 }
 const menuItemsSchema = new mongoose.Schema(menuItemsSubSchema);

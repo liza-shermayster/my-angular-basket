@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from './auth-data.model';
-import { Router } from "@angular/router";
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 
 
@@ -13,11 +12,10 @@ export class AuthService {
   private userData;
   private token;
   private userSubject = new BehaviorSubject('');
-  private newUser;
-  private router;
 
 
-  constructor(private http: HttpClient, private router: Router) {
+
+  constructor(private http: HttpClient) {
     if (localStorage.getItem('token') && localStorage.getItem('user')) {
       this.token = localStorage.getItem('token');
       this.userData = localStorage.getItem('user');
@@ -29,12 +27,9 @@ export class AuthService {
     return this.userData;
   }
 
-  createUser(email: string, password: string) {
+  createUser(email: string, password: string): Observable<any> {
     const authData: AuthData = { email: email, password: password };
-    this.http.post('http://localhost:3000/api/user/singup', authData).subscribe(response => {
-      this.router.navigate(['/order']);
-      console.log(response);
-    });
+    return this.http.post('http://localhost:3000/api/user/singup', authData);
   }
 
   login(email: string, password: string) {

@@ -1,7 +1,7 @@
 <h2 mat-subheader>Basket </h2>
 
 
-<!-- async do subscribe and unsubscribe  automatically-->
+<!-- async do subscribe and unsubscribe  automatically
 <mat-card *ngFor="let item of menu | filterBasket ">
 
   <div class="card-content">
@@ -16,9 +16,33 @@
 </mat-card>
 <div *ngIf="(total | async) > 0 ">Total price{{total| async}} </div>
 
+-->
 
 
-<br>
+<div *ngIf="menu">
+  <div *ngFor="let item of menu | filterBasket " class="container-card">
+    <div>
+      <mat-card>
+        <div>{{item.title}} </div>
+      </mat-card>
+    </div>
+
+
+    <div>
+      <mat-card>
+        <div>
+          <!--take data from counter component,activated by function addToBasket -->
+          <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
+          </app-counter>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div *ngIf="(total | async) > 0 ">Total price{{total| async}} </div>
+
+</div>
+
+
 <div class="example-button-row">
   <button routerLink="/menu" mat-raised-button color="primary">back to home page</button>
   <button routerLink="/login" mat-raised-button color="primary">go to payment</button>

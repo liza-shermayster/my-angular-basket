@@ -28,5 +28,9 @@ export class SingUpComponent implements OnInit {
   onSingUp(singUpForm: FormGroup) {
     this.authService
       .createUser(this.singUpForm.value.email, this.singUpForm.value.password)
+      .subscribe(response => {
+        this.router.navigate(['/order']);
+        console.log(response);
+      });;
   }
 }

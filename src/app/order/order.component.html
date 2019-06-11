@@ -1,10 +1,14 @@
 <p *ngIf='name'>
   hello {{name}}
 </p>
-<div *ngIf='menu'>
-  <ng-container *ngFor='let item of menu'>
-    <h3 *ngIf="item.amount">test {{item.title}} amount {{item.amount}} </h3>
-  </ng-container>
-  <div *ngIf="total > 0 ">Total price {{total}} </div>
-  <button [disabled]="!total" (click)="createOrder() ">Pay</button>
+<div *ngIf='menu' class="container">
+  <mat-card>
+    <ng-container *ngFor='let item of menu'>
+      <h3 *ngIf="item.amount">item title {{item.title}} amount {{item.amount}} </h3>
+    </ng-container>
+  </mat-card>
+  <mat-card>
+    <div *ngIf="total > 0 ">Total price {{total}} </div>
+  </mat-card>
+  <button mat-raised-button color="primary" [disabled]="!total" (click)="createOrder() ">Pay</button>
 </div>

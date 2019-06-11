@@ -9,6 +9,7 @@ router.post('/items', (req, res, next) => {
   const menuItem = new menuItemsSchema({
     title: req.body.title,
     price: req.body.price,
+    description: req.body.description,
     img: 'assets/img/apple-1589869_640.jpg'
   });
   menuItem.save();

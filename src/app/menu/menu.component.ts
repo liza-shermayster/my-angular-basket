@@ -3,6 +3,8 @@ import { MenuItem } from '../menu';
 import { MenuService } from '../menu.service';
 import { BasketService } from '../basket.service';
 import { PageEvent } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 
 @Component({
@@ -11,12 +13,15 @@ import { PageEvent } from '@angular/material';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  panelOpenState = false;
   menu: MenuItem[];
   searchValue = '';
   total;
   addAmount;
+  dialogRef;
 
-  constructor(private basketService: BasketService) {
+
+  constructor(private basketService: BasketService, public dialog: MatDialog, public dialogRef: MatDialogRef) {
     this.basketService.getBasketData().subscribe((data) => {
 
       this.menu = data;
@@ -39,7 +44,19 @@ export class MenuComponent {
     // this.basketService.updateBasket(this.menu);
     // this.basketService.updateBasket({ ...item, ...amount });
   }
+  openDialog(): void {
+    this.dialogRef = this.dialog.open(<any>{
+      width: '100px',
+      data: this.menu
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
 
+  }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

@@ -27,6 +27,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginComponent } from './auth/login /login.component';
 import { OrderComponent } from './order/order.component';
 import { AuthInterceptor } from './auth/auth-iterceptor';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
+
+
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 
 
@@ -43,7 +51,8 @@ import { AuthInterceptor } from './auth/auth-iterceptor';
     DescriptionComponent,
     LoginComponent,
     SingUpComponent,
-    OrderComponent
+    OrderComponent,
+
   ],
   imports: [
     CommonModule,
@@ -59,7 +68,12 @@ import { AuthInterceptor } from './auth/auth-iterceptor';
     ReactiveFormsModule,
     NgxPaginationModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatDialogModule
+
+
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

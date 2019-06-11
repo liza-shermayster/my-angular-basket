@@ -47,7 +47,7 @@ export class OrderComponent {
 
     }, err => {
       console.log('order not created', err);
-    })
+    });
   }
 
   getOrderData(): Order {

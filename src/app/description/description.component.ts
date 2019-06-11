@@ -9,24 +9,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./description.component.css']
 })
 export class DescriptionComponent implements OnInit {
-  obserBasketData;
-  itemKey: string;
-  itemData: BasketItem | MenuItem;
+  menuDescription;
 
-  constructor(private serviceData: BasketService, private route: ActivatedRoute) {
-    this.obserBasketData = this.serviceData.getBasketData();
+  constructor(private basketData: BasketService, private route: ActivatedRoute) {
+    this.basketData.getBasketData().subscribe((data) =>
+      this.menuDescription = data);
   }
 
   ngOnInit() {
-    this.itemKey = this.route.snapshot.params['item'];
-    this.obserBasketData.subscribe(this.onBasketItem);
+
   }
 
-  onBasketItem = (data: Basket) => {
-    console.log(data);
-    if (data && this.itemKey) {
-      this.itemData = data[this.itemKey];
-    }
-  }
+
 
 }

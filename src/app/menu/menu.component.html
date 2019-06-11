@@ -1,6 +1,4 @@
 <h3>Menu </h3>
-
-
 <mat-form-field class="example-form-field">
   <input matInput type="text" placeholder="search" [(ngModel)]="searchValue">
   <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
@@ -8,37 +6,33 @@
   </button>
 </mat-form-field>
 
-
-
-
 <div *ngIf="menu">
-  <!--
-    1.get our menu object from menu service
-    2.function keyvalue change object to array
-    3.async make subscription in template
-
-  -->
-  <mat-card *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }">
-    <img class="item-img" [src]="item.img" />
-    <div class=" card-content">
-      <div class="desc">
-        title {{item.title}}
-        price {{item.price}}
-        <a routerLink="/description">Item Description</a>
-      </div>
-      <div class="example-button-row">
-        <!--take data from counter component,activated by function addToBasket -->
-        <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
-        </app-counter>
-      </div>
-    </div>
-  </mat-card>
-
+  <div *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }; let i=index"
+    class="container-card">
+    <mat-card>
+      <h3 class="item-title">{{item.title}}</h3>
+      <button mat-raised-button (click)="openDialog()">more details</button>
+      <section class="card-section">
+        <div>
+          <img class="item-img" [src]="item.img" />
+        </div>
+        <div>
+          price {{item.price}}
+        </div>
+        <div class="example-button-row">
+          <!--take data from counter component,activated by function addToBasket -->
+          <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
+          </app-counter>
+        </div>
+      </section>
+    </mat-card>
+  </div>
   <div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
+</div>
 
-  <div class="example-button-row">
-    <button routerLink="/basket" mat-raised-button color="primary" [disabled]="(total | async) ===0">go to
-      cart</button>
-  </div>
+<div class="example-button-row">
+  <button routerLink="/basket" mat-raised-button color="primary" [disabled]="(total | async) ===0">go to
+    cart</button>
+</div>
