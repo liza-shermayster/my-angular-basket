@@ -14,7 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
@@ -30,11 +31,9 @@ import { AuthInterceptor } from './auth/auth-iterceptor';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
-
-
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { ItemCardComponent } from './menu/item-card/item-card.component';
+import { ToastrModule } from 'ngx-toastr';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -52,6 +51,7 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
     LoginComponent,
     SingUpComponent,
     OrderComponent,
+    ItemCardComponent,
 
   ],
   imports: [
@@ -71,7 +71,11 @@ import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-full-width'
+    }),
+    MatDividerModule
 
 
   ],

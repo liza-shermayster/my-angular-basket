@@ -7,26 +7,10 @@
 </mat-form-field>
 
 <div *ngIf="menu">
-  <div *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }; let i=index"
-    class="container-card">
-    <mat-card>
-      <h3 class="item-title">{{item.title}}</h3>
-      <button mat-raised-button (click)="openDialog()">more details</button>
-      <section class="card-section">
-        <div>
-          <img class="item-img" [src]="item.img" />
-        </div>
-        <div>
-          price {{item.price}}
-        </div>
-        <div class="example-button-row">
-          <!--take data from counter component,activated by function addToBasket -->
-          <app-counter [count]="item.amount || 0" (countChange)="addItemToBasket(item,$event)">
-          </app-counter>
-        </div>
-      </section>
-    </mat-card>
-  </div>
+  <app-item-card
+    *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }; let i=index"
+    class="container-card" [item]="item" (amountChange)="addItemToBasket($event)">
+  </app-item-card>
   <div>
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>

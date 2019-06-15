@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from "../auth.service";
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ["./login.component.css"],
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isLoading = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService, private location: Location) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -32,9 +33,10 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(() => {
-        this.router.navigate(['/order']);
+        this.location.back();
       }, err => {
         console.warn(err);
+        this.toastr.error("Login failed");
       })
   }
 }

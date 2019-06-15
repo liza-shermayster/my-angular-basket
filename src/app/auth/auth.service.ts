@@ -6,12 +6,14 @@ import { tap } from 'rxjs/internal/operators/tap';
 
 
 
+
 @Injectable({ providedIn: 'root' })
 
 export class AuthService {
   private userData;
   private token;
   private userSubject = new BehaviorSubject('');
+  private tokenSubject = new BehaviorSubject('');
 
 
 
@@ -29,7 +31,18 @@ export class AuthService {
 
   createUser(email: string, password: string): Observable<any> {
     const authData: AuthData = { email: email, password: password };
-    return this.http.post('http://localhost:3000/api/user/singup', authData);
+    return this.http.post('http://localhost:3000/api/user/singup', authData)
+      .pipe(
+        tap(({ token }) => {
+          this.token = token;
+          localStorage.setItem('token', token);
+          localStorage.setItem('user', email);
+          this.userData = email;
+          console.log("this.userData", this.userData);
+          this.updateUser();
+          this.updateToken();
+        })
+      );
   }
 
   login(email: string, password: string) {
@@ -43,7 +56,9 @@ export class AuthService {
           localStorage.setItem('token', token);
           localStorage.setItem('user', user);
           this.userData = user;
+          console.log("this.userData", this.userData);
           this.updateUser();
+          this.updateToken();
         })
       )
   }
@@ -53,6 +68,21 @@ export class AuthService {
 
   getUserData() {
     return this.userSubject.asObservable();
+  }
+
+  updateToken() {
+    this.tokenSubject.next(this.token);
+  }
+  getTokenSubject() {
+    return this.tokenSubject.asObservable();
+  }
+
+  logOut() {
+    this.token = null;
+    this.updateToken();
+    this.userData = null;
+    this.updateUser();
+    localStorage.clear();
   }
 
 }

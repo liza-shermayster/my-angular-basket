@@ -9,8 +9,8 @@ router.post('/order', checkAuth,
     const order = new orderSchema({
       user: req.body.user,
       menuItems: req.body.menuItems,
-      total: req.body.total,
-      creator: req.userDataEmailId.userId
+      total: req.body.total
+
     });
 
 

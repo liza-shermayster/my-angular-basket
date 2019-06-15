@@ -18,14 +18,23 @@ router.post("/singUp", (req, res, next) => {
       // Saving data
       user.save()
         .then(result => {
+          const token = jwt.sign(
+            { email: result.email, userId: result._id },
+            "secret_key",
+          );
           res.status(201).json({
             message: "User created!",
-            result: result
+            result: result,
+            token: token
           });
         })
         .catch(err => {
-          res.status(500).json({
-            error: err
+          console.log(err);
+          // if (err.errors.user.kind === 'unique') {
+          //   return res.status(401).json({ "reason": "user exist" })
+          // }
+          return res.status(500).json({
+            err
           });
         });
     });
@@ -61,8 +70,6 @@ router.post("/login", (req, res, next) => {
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
         "secret_key",
-        /// Automatically log off in one hour
-        // { expiresIn: "1h" }
       );
       res.status(200).json({
         token: token,
@@ -70,6 +77,7 @@ router.post("/login", (req, res, next) => {
       });
     })
     .catch(err => {
+
       return res.status(401).json({
         message: "Auth failed"
       });

@@ -3,7 +3,7 @@ import { Basket, BasketItem, MenuItem } from './menu';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { element } from '@angular/core/src/render3';
+
 import { Observable } from 'rxjs';
 
 interface MenuResponse {
@@ -63,11 +63,15 @@ export class BasketService {
     for (const x of menu) {
       if (x.amount) {
         total += x.amount * x.price;
-        console.log('price', x.price)
+        console.log('price', x.price);
       }
     }
     console.log('total', total);
 
     return total;
+  }
+  resetOrder() {
+    this.menuData.map(menuItem => menuItem.amount = 0);
+    this.basketSubject.next([...this.menuData]);
   }
 }

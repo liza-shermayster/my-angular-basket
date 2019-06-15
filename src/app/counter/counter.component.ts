@@ -20,18 +20,17 @@ export class CounterComponent implements OnInit {
   ngOnInit() {
   }
   addToCounter() {
-    this.count++;
     console.log(this.count);
-    this.sendCount();
+    this.sendCount(this.count + 1);
   }
 
   removeFromCounter() {
-    this.count--;
-    this.sendCount();
+
+    this.sendCount(this.count - 1);
   }
 
-  sendCount() {
-    this.countChange.emit(this.count);
+  sendCount(num) {
+    this.countChange.emit(num);
   }
 
 

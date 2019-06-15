@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: './singUp.component.html',
-  styleUrls: ["./singUp.component.css"],
+  styleUrls: ['./singUp.component.css'],
 })
 export class SingUpComponent implements OnInit {
   singUpForm: FormGroup;
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService, private location: Location) { }
 
   ngOnInit() {
     this.singUpForm = new FormGroup({
@@ -29,8 +31,13 @@ export class SingUpComponent implements OnInit {
     this.authService
       .createUser(this.singUpForm.value.email, this.singUpForm.value.password)
       .subscribe(response => {
-        this.router.navigate(['/order']);
+        this.location.back();
         console.log(response);
+      }, err => {
+        console.error(err);
+        this.toastr.error("Authentication failed");
+
+        // this.singUpForm.controls.email.setErrors({ "emailExist"})
       });;
   }
 }

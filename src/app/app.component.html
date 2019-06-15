@@ -3,8 +3,13 @@
     <mat-toolbar-row>
       <span>My First Web Site</span>
       <span class="example-spacer"></span>
-      <a mat-button routerLink="/login">Login</a>
-      <a mat-button routerLink="/singUp">Sign up</a>
+      <ng-container *ngIf="!user;else logOut">
+        <a mat-button routerLink="/login">Login</a>
+        <a mat-button routerLink="/singUp">Sign up</a>
+      </ng-container>
+      <ng-template #logOut>
+        <button mat-button (click)="onLogout()">LogOut</button>
+      </ng-template>
       <mat-icon class="example-icon" [matMenuTriggerFor]="nav">menu</mat-icon>
       <mat-menu #nav="matMenu">
         <button routerLink="/menu" mat-menu-item>Home</button>
