@@ -3,6 +3,9 @@ import { BasketItem, Basket, MenuItem } from '../menu';
 import { BasketService } from '../basket.service';
 import { del } from 'selenium-webdriver/http';
 import { Router } from '@angular/router';
+import { Order } from '../order';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-basket',
@@ -12,8 +15,12 @@ import { Router } from '@angular/router';
 export class BasketComponent {
   menu: MenuItem[];
   total;
-  router;
-  constructor(private basketService: BasketService) {
+  user = false;
+  email;
+  name;
+  creator;
+  isPayed = false;
+  constructor(private basketService: BasketService, private auth: AuthService, private http: HttpClient, private router: Router) {
     this.basketService.getBasketData().subscribe((data) => {
       console.log('data from basket com', data);
       this.menu = data;
@@ -21,6 +28,36 @@ export class BasketComponent {
     });
 
     this.total = this.basketService.getTotalPrice();
+
+    this.auth.getUserData().subscribe((email: string) => {
+      if (email) {
+        console.log('data order user', email);
+        this.email = email;
+        this.name = email.substring(0, email.indexOf("@"));
+        console.log(this.name);
+
+      }
+    });
+  }
+  createOrder() {
+    const order = this.getOrderData();
+    this.http.post('http://localhost:3000/api/order/order', order).subscribe((res) => {
+      console.log('order created!', res);
+      this.isPayed = true;
+      // this.router.navigate(['/menu']);
+      this.basketService.resetOrder();
+
+
+    }, err => {
+      console.log('order not created', err);
+    });
+  }
+  getOrderData(): Order {
+    return {
+      user: this.email,
+      menuItems: this.menu.filter(item => item.amount > 0),
+      total: this.total,
+    };
   }
 
   addItemToBasket(item, amount) {

@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Contact } from './contact';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { tap } from 'rxjs/internal/operators/tap';
+import { debounceTime, delay } from 'rxjs/operators';
+
+
 
 
 
@@ -12,7 +21,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
   contactData = false;
-  constructor() { }
+  constructor(private http: HttpClient, private location: Location, private toastr: ToastrService) { }
 
 
   ngOnInit() {
@@ -30,9 +39,38 @@ export class ContactUsComponent implements OnInit {
         '';
   }
   onSubmit() {
-    console.log(this.contactForm.value);
-    this.contactData = true;
+
+    this.createContact();
+  }
+
+  getData(): Contact {
+    return {
+      name: this.contactForm.value.userName,
+      email: this.contactForm.value.email,
+      message: this.contactForm.value.message
+    }
+  }
+
+  createContact() {
+    const contact = this.getData();
+    console.log('contact', contact);
+    this.http.post('http://localhost:3000/api/contact', contact)
+      .pipe(
+        tap(() => {
+          this.contactData = true;
+        }),
+        delay(1500)
+      )
+      .subscribe((res) => {
+        console.log('contact created!', res);
+        this.location.back();
+
+      }, err => {
+        console.log('contact not created', err);
+      });
 
   }
 }
+
+
 

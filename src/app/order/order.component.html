@@ -26,11 +26,17 @@
 
 <ng-template #orderList>
   <mat-card>
+
     <ng-container *ngFor='let item of menu'>
+
+
       <div *ngIf='menu' class="container">
         <h3 *ngIf="item.amount">item title {{item.title}} amount {{item.amount}} </h3>
       </div>
+
+
     </ng-container>
+
   </mat-card>
   <mat-card>
     <div>Total price {{total}} </div>

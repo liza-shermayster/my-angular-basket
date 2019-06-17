@@ -12,8 +12,6 @@ router.post('/order', checkAuth,
       total: req.body.total
 
     });
-
-
     console.log('order', order);
     order.save()
       .then(result => {
