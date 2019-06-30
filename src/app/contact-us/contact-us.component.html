@@ -3,7 +3,7 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="example-container">
         <mat-form-field>
-          <input matInput placeholder="Your name" formControlName="userName">
+          <input id="user-name" matInput placeholder="Your name" formControlName="userName">
           <mat-error *ngIf="!contactForm.get('userName').valid && contactForm.get('userName').touched">
             Please enter your name
           </mat-error>
