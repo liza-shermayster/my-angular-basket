@@ -1,7 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { BasketItem } from '../menu';
 
-type PipeValue = { key: string, value: BasketItem }
 @Pipe({
   name: 'filterBasket'
 })

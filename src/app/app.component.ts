@@ -1,12 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Router } from '@angular/router';
 import { BasketService } from './basket.service';
-import { Location } from '@angular/common';
-
-
-
-
 
 @Component({
   selector: 'app-root',

@@ -1,19 +1,16 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { BasketService } from '../basket.service';
 import { AuthService } from '../auth/auth.service';
-import { BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Order } from '../order';
-import { isNgTemplate } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { OrderService } from './order.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
   menu;
   total = 0;
   user = false;
@@ -21,23 +18,18 @@ export class OrderComponent implements OnInit {
   name;
   creator;
   isPayed = false;
-
+  menu$: Subscription;
+  basket$: Subscription;
   @Output() amountChange = new EventEmitter();
 
-
-  ngOnInit() {
-  }
-
-
-  constructor(private basketService: BasketService, private auth: AuthService, private http: HttpClient, private router: Router) {
-    this.basketService.getBasketData().subscribe((data) => {
+  constructor(private basketService: BasketService, private auth: AuthService, private orderService: OrderService) {
+    this.menu$ = this.basketService.getBasketData().subscribe((data) => {
       this.menu = data;
     });
 
-    this.basketService.getTotalPrice().subscribe(total => {
+    this.basket$ = this.basketService.getTotalPrice().subscribe(total => {
       this.total = total;
     });
-
 
     this.auth.getUserData().subscribe((email: string) => {
       if (email) {
@@ -49,6 +41,15 @@ export class OrderComponent implements OnInit {
       }
     });
   }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.menu$.unsubscribe();
+    this.basket$.unsubscribe();
+  }
+
   onChangeAmount(amount: number) {
     this.amountChange.emit({ ...this.menu, amount });
   }
@@ -56,10 +57,9 @@ export class OrderComponent implements OnInit {
 
   createOrder() {
     const order = this.getOrderData();
-    this.http.post('http://localhost:3000/api/order/order', order).subscribe((res) => {
+    this.orderService.createOrderOnService(order).subscribe((res) => {
       console.log('order created!', res);
       this.isPayed = true;
-      // this.router.navigate(['/menu']);
       this.basketService.resetOrder();
 
 
@@ -86,8 +86,5 @@ export class OrderComponent implements OnInit {
     }
     console.log('this menu', this.menu);
     this.basketService.updateBasket(this.menu);
-    // this.basketService.updateBasket({ ...item, ...amount });
   }
-
-
 }

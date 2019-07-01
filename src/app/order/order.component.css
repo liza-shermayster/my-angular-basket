@@ -1,8 +1,12 @@
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
-  /* background-color: #3f51b5; */
+
 }
+.mat-raised-button{
+  margin-inline-end: 10px;
+}
+
 .container {
   margin: 2rem auto;
   max-width: 900px;

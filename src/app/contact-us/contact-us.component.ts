@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Contact } from './contact';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
 import { tap } from 'rxjs/internal/operators/tap';
-import { debounceTime, delay } from 'rxjs/operators';
-
-
-
-
+import { delay } from 'rxjs/operators';
+import { ContactService } from './contact.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -18,10 +14,11 @@ import { debounceTime, delay } from 'rxjs/operators';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
   contactData = false;
-  constructor(private http: HttpClient, private location: Location, private toastr: ToastrService) { }
+  contact$: Subscription;
+  constructor(private http: HttpClient, private location: Location, private contactService: ContactService) { }
 
 
   ngOnInit() {
@@ -32,6 +29,9 @@ export class ContactUsComponent implements OnInit {
 
     });
   }
+  ngOnDestroy() {
+    this.contact$.unsubscribe();
+  }
 
   getErrorMessage() {
     return this.contactForm.controls.email.hasError('required') ? ' Please enter your email' :
@@ -39,7 +39,6 @@ export class ContactUsComponent implements OnInit {
         '';
   }
   onSubmit() {
-
     this.createContact();
   }
 
@@ -54,13 +53,12 @@ export class ContactUsComponent implements OnInit {
   createContact() {
     const contact = this.getData();
     console.log('contact', contact);
-    this.http.post('http://localhost:3000/api/contact', contact)
-      .pipe(
-        tap(() => {
-          this.contactData = true;
-        }),
-        delay(1500)
-      )
+    this.contact$ = this.contactService.createDataContact(contact).pipe(
+      tap(() => {
+        this.contactData = true;
+      }),
+      delay(1500)
+    )
       .subscribe((res) => {
         console.log('contact created!', res);
         this.location.back();

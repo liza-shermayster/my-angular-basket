@@ -20,7 +20,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
 import { FilterBasketPipe } from './basket/filter-basket.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { DescriptionComponent } from './description/description.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SingUpComponent } from './auth/singUp/singUp.component';
@@ -34,6 +33,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ItemCardComponent } from './menu/item-card/item-card.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatDividerModule } from '@angular/material/divider';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
@@ -47,11 +47,11 @@ import { MatDividerModule } from '@angular/material/divider';
     ContactUsComponent,
     SearchPipe,
     FilterBasketPipe,
-    DescriptionComponent,
     LoginComponent,
     SingUpComponent,
     OrderComponent,
     ItemCardComponent,
+    AboutUsComponent,
 
   ],
   imports: [

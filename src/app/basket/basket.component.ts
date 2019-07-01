@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BasketItem, Basket, MenuItem } from '../menu';
+import { MenuItem } from '../menu';
 import { BasketService } from '../basket.service';
 import { del } from 'selenium-webdriver/http';
 import { Router } from '@angular/router';
