@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MenuComponent } from './menu/menu.component';
-import { BasketComponent } from './basket/basket.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from './menu/search.pipe';
-import { FilterBasketPipe } from './basket/filter-basket.pipe';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -42,11 +42,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
   declarations: [
     AppComponent,
     MenuComponent,
-    BasketComponent,
     CounterComponent,
     ContactUsComponent,
     SearchPipe,
-    FilterBasketPipe,
     LoginComponent,
     SingUpComponent,
     OrderComponent,
