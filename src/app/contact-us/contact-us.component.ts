@@ -30,7 +30,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.contact$.unsubscribe();
+    // this.contact$.unsubscribe();
   }
 
   getErrorMessage() {
