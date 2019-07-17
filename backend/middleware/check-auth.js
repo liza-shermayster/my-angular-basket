@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     req.userDataEmailId = { email: decodedToken.email, userId: decodedToken.userId }
 
     if (!req.headers.authorization) {
-      res.send(401, 'missing authorization header');
+      res.send(401, 'misSign authorization header');
     }
     next();
   } catch (error) {

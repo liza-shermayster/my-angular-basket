@@ -5,7 +5,7 @@
       <span class="example-spacer"></span>
       <ng-container *ngIf="!user;else logOut">
         <a mat-button routerLink="/login">Login</a>
-        <a mat-button routerLink="/singUp">Sign up</a>
+        <a mat-button routerLink="/signUp">Sign up</a>
       </ng-container>
       <ng-template #logOut>
         <button mat-button (click)="onLogout()">Logout</button>

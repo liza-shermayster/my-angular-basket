@@ -1,6 +1,6 @@
 <mat-card>
   <div>
-    <form [formGroup]="singUpForm" (ngSubmit)="onSingUp()">
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
       <div class="example-container">
         <mat-form-field>
           <input matInput placeholder="Email" formControlName="email" required email>
@@ -9,14 +9,14 @@
         <br>
         <mat-form-field>
           <input matInput placeholder="Password" formControlName="password" required>
-          <mat-error *ngIf="!singUpForm.get('email').valid && singUpForm.get('email').touched">
+          <mat-error *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">
             Please enter valid password.
           </mat-error>
         </mat-form-field>
         <br>
       </div>
       <div class="example-button-row">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!singUpForm.valid">SingUp</button>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!signUpForm.valid">Sign up</button>
       </div>
     </form>
   </div>

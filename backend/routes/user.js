@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 // Receiving data from the user's login, creating object : user-login and password
-router.post("/singUp", (req, res, next) => {
+router.post("/signUp", (req, res, next) => {
   // Saving a password on the server side
   bcrypt.hash(req.body.password, 10)
     .then(hash => {

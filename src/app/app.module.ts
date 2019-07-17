@@ -22,7 +22,7 @@ import { SearchPipe } from './menu/search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { SingUpComponent } from './auth/singUp/singUp.component';
+import { SignUpComponent } from './auth/signUp/signUp.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginComponent } from './auth/login /login.component';
 import { OrderComponent } from './order/order.component';
@@ -46,7 +46,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ContactUsComponent,
     SearchPipe,
     LoginComponent,
-    SingUpComponent,
+    SignUpComponent,
     OrderComponent,
     ItemCardComponent,
     AboutUsComponent,

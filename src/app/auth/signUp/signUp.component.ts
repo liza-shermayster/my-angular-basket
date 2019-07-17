@@ -7,29 +7,29 @@ import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 
 @Component({
-  templateUrl: './singUp.component.html',
-  styleUrls: ['./singUp.component.css'],
+  templateUrl: './signUp.component.html',
+  styleUrls: ['./signUp.component.css'],
 })
-export class SingUpComponent implements OnInit {
-  singUpForm: FormGroup;
+export class SignUpComponent implements OnInit {
+  signUpForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService, private location: Location) { }
 
   ngOnInit() {
-    this.singUpForm = new FormGroup({
+    this.signUpForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
 
     });
   }
   getErrorMessage() {
-    return this.singUpForm.controls.email.hasError('required') ? ' Please enter your email' :
-      this.singUpForm.controls.email.hasError('email') ? 'Not a valid email' :
+    return this.signUpForm.controls.email.hasError('required') ? ' Please enter your email' :
+      this.signUpForm.controls.email.hasError('email') ? 'Not a valid email' :
         '';
   }
-  onSingUp(singUpForm: FormGroup) {
+  onSignUp(signUpForm: FormGroup) {
     this.authService
-      .createUser(this.singUpForm.value.email, this.singUpForm.value.password)
+      .createUser(this.signUpForm.value.email, this.signUpForm.value.password)
       .subscribe(response => {
         this.location.back();
         console.log(response);
@@ -37,7 +37,7 @@ export class SingUpComponent implements OnInit {
         console.error(err);
         this.toastr.error("Authentication failed");
 
-        // this.singUpForm.controls.email.setErrors({ "emailExist"})
-      });;
+        // this.signUpForm.controls.email.setErrors({ "emailExist"})
+      });
   }
 }

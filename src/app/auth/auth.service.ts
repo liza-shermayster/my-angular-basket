@@ -31,7 +31,7 @@ export class AuthService {
 
   createUser(email: string, password: string): Observable<any> {
     const authData: AuthData = { email: email, password: password };
-    return this.http.post('http://localhost:3000/api/user/singup', authData)
+    return this.http.post('http://localhost:3000/api/user/signup', authData)
       .pipe(
         tap(({ token }) => {
           this.token = token;
@@ -60,7 +60,7 @@ export class AuthService {
           this.updateUser();
           this.updateToken();
         })
-      )
+      );
   }
   updateUser() {
     this.userSubject.next(this.userData);
