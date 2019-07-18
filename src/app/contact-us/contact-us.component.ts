@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Contact } from './contact';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent implements OnInit, OnDestroy {
+export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
   contactData = false;
   contact$: Subscription;
@@ -29,9 +29,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
     });
   }
-  ngOnDestroy() {
-    // this.contact$.unsubscribe();
-  }
+
 
   getErrorMessage() {
     return this.contactForm.controls.email.hasError('required') ? ' Please enter your email' :
