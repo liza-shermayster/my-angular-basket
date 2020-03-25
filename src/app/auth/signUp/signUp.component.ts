@@ -1,10 +1,8 @@
-
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth.service';
 
 @Component({
   templateUrl: './signUp.component.html',
@@ -13,7 +11,7 @@ import { Location } from '@angular/common';
 export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private toastr: ToastrService, private location: Location) { }
+  constructor(private authService: AuthService, private toastr: ToastrService, private location: Location) { }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -32,12 +30,9 @@ export class SignUpComponent implements OnInit {
       .createUser(this.signUpForm.value.email, this.signUpForm.value.password)
       .subscribe(response => {
         this.location.back();
-        console.log(response);
       }, err => {
         console.error(err);
-        this.toastr.error("Authentication failed");
-
-        // this.signUpForm.controls.email.setErrors({ "emailExist"})
+        this.toastr.error('Authentication failed');
       });
   }
 }

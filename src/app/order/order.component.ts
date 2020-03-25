@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { BasketService } from '../basket.service';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { BasketService } from '../basket.service';
 import { Order } from '../order';
 import { OrderService } from './order.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-order',
@@ -33,11 +33,8 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     this.auth.getUserData().subscribe((email: string) => {
       if (email) {
-        console.log('data order user', email);
         this.email = email;
-        this.name = email.substring(0, email.indexOf("@"));
-        console.log(this.name);
-
+        this.name = email.substring(0, email.indexOf('@'));
       }
     });
   }
@@ -58,11 +55,8 @@ export class OrderComponent implements OnInit, OnDestroy {
   createOrder() {
     const order = this.getOrderData();
     this.orderService.createOrderOnService(order).subscribe((res) => {
-      console.log('order created!', res);
       this.isPayed = true;
       this.basketService.resetOrder();
-
-
     }, err => {
       console.log('order not created', err);
     });
@@ -76,15 +70,12 @@ export class OrderComponent implements OnInit, OnDestroy {
     };
   }
   addItemToBasket(item, amount) {
-    console.log('amount item from menu com', amount);
-    console.log('menu item from menu com', item);
     for (const x of this.menu) {
 
       if (item._id === x._id) {
         x.amount = amount;
       }
     }
-    console.log('this menu', this.menu);
     this.basketService.updateBasket(this.menu);
   }
 }

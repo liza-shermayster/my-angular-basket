@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Basket, BasketItem, MenuItem } from './menu';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { map } from 'rxjs/operators';
+import { MenuItem } from './menu';
 interface MenuResponse {
   message: string;
   menuItems: MenuItem[];
@@ -42,9 +40,7 @@ export class BasketService {
     const newBasketItem = item;
     for (const x of this.menuData) {
       if (x._id === newBasketItem._id) {
-        console.log('menu item id', x._id);
         x.amount = newBasketItem.amount;
-        console.log('menu item amount', x.amount);
       }
     }
     this.basketSubject.next([...this.menuData]);
@@ -57,17 +53,13 @@ export class BasketService {
 
   getTotalFromMenuItems(menu: MenuItem[]): number {
 
-    console.log('obj service', menu);
     let total = 0;
 
     for (const x of menu) {
       if (x.amount) {
         total += x.amount * x.price;
-        console.log('price', x.price);
       }
     }
-    console.log('total', total);
-
     return total;
   }
   resetOrder() {

@@ -1,23 +1,23 @@
 <mat-card>
-  <h3 class="item-title">{{item.title}}</h3>
-
-
+  <h3 class="item-title">{{ item.title }}</h3>
   <section class="card-section">
     <div>
       <img class="item-img" [src]="item.img" />
     </div>
-    <div>
-      price {{item.price}}
-    </div>
+    <div>price {{ item.price }}</div>
     <div class="example-button-row">
       <!--take data from counter component,activated by function addToBasket -->
-      <app-counter [count]="item.amount || 0" (countChange)=" onChangeAmount($event)">
+      <app-counter
+        [count]="item.amount || 0"
+        (countChange)="onChangeAmount($event)"
+      >
       </app-counter>
     </div>
   </section>
   <section class="btn-section">
-    <button mat-button color="primary" (click)="toggleDetails()">show description</button>
-    <div *ngIf="showDetails">{{item.description|| "no details"}}
-    </div>
+    <button mat-button color="primary" (click)="toggleDetails()">
+      show description
+    </button>
+    <div *ngIf="showDetails">{{ item.description || "no details" }}</div>
   </section>
 </mat-card>

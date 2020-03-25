@@ -1,41 +1,24 @@
-const express = require('express');
-const menuItemsSchema = require('../models/menuDB');
+const express = require("express");
+const menuItemsSchema = require("../models/menuDB");
 const router = express.Router();
-const checkAuth = require("../middleware/check-auth");
 
-router.post('/items', (req, res, next) => {
-  console.log("request title", req.body.title);
-
+router.post("/items", (req, res) => {
   const menuItem = new menuItemsSchema({
     title: req.body.title,
     price: req.body.price,
     description: req.body.description,
-    img: 'assets/img/apple-1589869_640.jpg'
+    img: "assets/img/apple-1589869_640.jpg"
   });
   menuItem.save();
   res.status(201).json({
-    message: 'Post added successfully'
+    message: "Post added successfully"
   });
 });
-// let menuItem = new menuItemsSchema(
-//   { title: 'apple', price: 1, img: 'assets/img/apple-1589869_640.jpg' }
-//   // { title: 'banana', price: 2, img: 'assets/img/apple-1589869_640.jpg' },
-//   // { title: 'mango', price: 3, img: 'assets/img/apple-1589869_640.jpg' },
-//   // { title: 'avocado', price: 4, img: 'assets/img/apple-1589869_640.jpg' },
-//   // { title: 'blueberries', price: 5, img: 'assets/img/apple-1589869_640.jpg' }
-// );
 
-// menuItem.save(function (err) {
-//   if (err) {
-//     console.log(err);
-//   }
-// });
-
-router.get('/', (req, res, next) => {
-
+router.get("/", (_, res) => {
   menuItemsSchema.find().then(documents => {
     res.status(200).json({
-      message: 'Posts fetched successfully!',
+      message: "Posts fetched successfully!",
       menuItems: documents
     });
   });
