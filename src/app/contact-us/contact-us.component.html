@@ -1,33 +1,59 @@
 <mat-card>
-  <div class="contact" *ngIf="!contactData">Contact Us
+  <div class="contact" *ngIf="!contactData">
+    Contact Us
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="example-container">
         <mat-form-field>
-          <input id="user-name" matInput placeholder="Your name" formControlName="userName">
-          <mat-error *ngIf="!contactForm.get('userName').valid && contactForm.get('userName').touched">
+          <input
+            id="user-name"
+            matInput
+            placeholder="Your name"
+            formControlName="userName"
+          />
+          <mat-error
+            *ngIf="
+              !contactForm.get('userName').valid &&
+              contactForm.get('userName').touched
+            "
+          >
             Please enter your name
           </mat-error>
         </mat-form-field>
-        <br>
+        <br />
 
         <mat-form-field>
-          <input matInput placeholder="Enter your email" formControlName="email">
-          <mat-error>{{getErrorMessage()}}</mat-error>
+          <input
+            matInput
+            placeholder="Enter your email"
+            formControlName="email"
+          />
+          <mat-error>{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
 
-        <br>
+        <br />
         <mat-form-field>
-          <textarea matInput placeholder="Your Message" formControlName="message"></textarea>
+          <textarea
+            matInput
+            placeholder="Your Message"
+            formControlName="message"
+          ></textarea>
         </mat-form-field>
 
-        <br>
+        <br />
       </div>
       <div class="example-button-row">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!contactForm.valid">Submit</button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="!contactForm.valid"
+        >
+          Submit
+        </button>
       </div>
     </form>
   </div>
   <div *ngIf="contactData">
-    <h3> We will contact with you soon.</h3>
+    <h3>We will contact with you soon.</h3>
   </div>
 </mat-card>

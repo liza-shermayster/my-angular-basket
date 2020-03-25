@@ -1,47 +1,50 @@
 <div *ngIf="!isPayed; else payed">
-  <h3 *ngIf='name'>
-    hello {{name}}
-  </h3>
+  <h3 *ngIf="name">hello {{ name }}</h3>
   <ng-template [ngIf]="total > 0">
     <ng-container *ngTemplateOutlet="orderList"></ng-container>
   </ng-template>
 
   <ng-template [ngIf]="!name">
     <mat-card>
-      <h3> Please you need to identified </h3>
+      <h3>Please you need to identified</h3>
     </mat-card>
 
     <button mat-raised-button color="primary" routerLink="/login">Login</button>
-    <button mat-raised-button color="primary" routerLink="/signUp">Sign up</button>
+    <button mat-raised-button color="primary" routerLink="/signUp">
+      Sign up
+    </button>
   </ng-template>
 
   <ng-template [ngIf]="name">
-    <button mat-raised-button color="primary" [disabled]="!total" (click)="createOrder()">Pay</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!total"
+      (click)="createOrder()"
+    >
+      Pay
+    </button>
   </ng-template>
-
 </div>
 
 <ng-template #payed>
   <h3>Successfully Paid</h3>
-  <button mat-raised-button color="primary" routerLink="/menu">go to home page</button>
+  <button mat-raised-button color="primary" routerLink="/menu">
+    go to home page
+  </button>
 </ng-template>
-
 
 <ng-template #orderList>
   <mat-card>
-
-    <ng-container *ngFor='let item of menu'>
-
-
-      <div *ngIf='menu' class="container">
-        <h3 *ngIf="item.amount">item title {{item.title}} amount {{item.amount}} </h3>
+    <ng-container *ngFor="let item of menu">
+      <div *ngIf="menu" class="container">
+        <h3 *ngIf="item.amount">
+          item title {{ item.title }} amount {{ item.amount }}
+        </h3>
       </div>
-
-
     </ng-container>
-
   </mat-card>
   <mat-card>
-    <h3>Total price {{total}} </h3>
+    <h3>Total price {{ total }}</h3>
   </mat-card>
 </ng-template>

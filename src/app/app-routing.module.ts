@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { MenuComponent } from './menu/menu.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { SignUpComponent } from './auth/signUp/signUp.component';
-import { LoginComponent } from './auth/login /login.component';
-import { OrderComponent } from './order/order.component';
+import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { LoginComponent } from './auth/login /login.component';
+import { SignUpComponent } from './auth/signUp/signUp.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { MenuComponent } from './menu/menu.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent },

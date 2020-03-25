@@ -1,13 +1,13 @@
 
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from "../auth.service";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Location } from '@angular/common';
+import { AuthService } from '../auth.service';
 @Component({
   templateUrl: './login.component.html',
-  styleUrls: ["./login.component.css"],
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
@@ -28,15 +28,13 @@ export class LoginComponent implements OnInit {
         '';
   }
   onLogin() {
-    console.log(this.loginForm.value);
-    console.log(this.loginForm.value.email);
     this.authService
       .login(this.loginForm.value.email, this.loginForm.value.password)
       .subscribe(() => {
         this.location.back();
       }, err => {
         console.warn(err);
-        this.toastr.error("Login failed");
-      })
+        this.toastr.error('Login failed');
+      });
   }
 }

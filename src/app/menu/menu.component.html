@@ -1,17 +1,30 @@
-<h3>Menu </h3>
+<h3>Menu</h3>
 <mat-form-field class="example-form-field">
-  <input matInput type="text" placeholder="search" [(ngModel)]="searchValue">
-  <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+  <input matInput type="text" placeholder="search" [(ngModel)]="searchValue" />
+  <button
+    mat-button
+    *ngIf="searchValue"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="searchValue = ''"
+  >
     <mat-icon>close</mat-icon>
   </button>
 </mat-form-field>
 
 <div *ngIf="menu">
-  <div *ngFor="let item of menu | search: searchValue | paginate: { itemsPerPage: 3, currentPage: p }; let i=index"
-    class="container-card">
+  <div
+    *ngFor="
+      let item of menu
+        | search: searchValue
+        | paginate: { itemsPerPage: 3, currentPage: p };
+      let i = index
+    "
+    class="container-card"
+  >
     <app-item-card [item]="item" (amountChange)="addItemToBasket($event)">
     </app-item-card>
-
   </div>
   <div class="pagination">
     <pagination-controls (pageChange)="p = $event"></pagination-controls>
@@ -19,6 +32,12 @@
 </div>
 
 <div class="example-button-row">
-  <button routerLink="/order" mat-raised-button color="primary" [disabled]="(total | async) ===0">go to
-    cart</button>
+  <button
+    routerLink="/order"
+    mat-raised-button
+    color="primary"
+    [disabled]="(total | async) === 0"
+  >
+    go to cart
+  </button>
 </div>

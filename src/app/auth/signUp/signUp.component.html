@@ -3,20 +3,42 @@
     <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
       <div class="example-container">
         <mat-form-field>
-          <input matInput placeholder="Email" formControlName="email" required email>
-          <mat-error>{{getErrorMessage()}}</mat-error>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required
+            email
+          />
+          <mat-error>{{ getErrorMessage() }}</mat-error>
         </mat-form-field>
-        <br>
+        <br />
         <mat-form-field>
-          <input matInput placeholder="Password" formControlName="password" required>
-          <mat-error *ngIf="!signUpForm.get('email').valid && signUpForm.get('email').touched">
+          <input
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <mat-error
+            *ngIf="
+              !signUpForm.get('email').valid && signUpForm.get('email').touched
+            "
+          >
             Please enter valid password.
           </mat-error>
         </mat-form-field>
-        <br>
+        <br />
       </div>
       <div class="example-button-row">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!signUpForm.valid">Sign up</button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="!signUpForm.valid"
+        >
+          Sign up
+        </button>
       </div>
     </form>
   </div>

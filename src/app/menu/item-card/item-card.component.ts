@@ -1,7 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
-
-
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-item-card',
   templateUrl: './item-card.component.html',
@@ -21,7 +18,6 @@ export class ItemCardComponent implements OnInit {
   }
   toggleDetails() {
     this.showDetails = !this.showDetails;
-    console.log(this.showDetails);
   }
 
 

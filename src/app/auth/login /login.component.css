@@ -7,13 +7,13 @@
 .example-container > * {
   width: 100%;
 }
-.contact{
+.contact {
   margin-top: 40px;
 }
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
 }
-input.ng-invalid.ng-touched{
-  text-align :1px solid red;
+input.ng-invalid.ng-touched {
+  text-align: 1px solid red;
 }

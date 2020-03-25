@@ -2,39 +2,33 @@
   margin: 2rem auto;
   max-width: 900px;
 }
-.container-card{
+.container-card {
   margin-bottom: 10px;
 }
 
 .example-icon {
   padding: 0 14px;
   cursor: pointer;
-
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
-
-
 .example-card {
   max-width: 400px;
 }
-
 
 .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
 }
 
-
 .example-form-field {
   width: 200px;
 }
 
-
-.item-img{
+.item-img {
   max-width: 100px;
 }
 .mat-expansion-panel-header {
@@ -44,25 +38,22 @@
   width: 100%;
   justify-content: space-between;
 }
-.pagination{
+.pagination {
   display: flex;
   justify-content: center;
 }
 
-
-
-
 @media screen and (max-width: 550px) {
   section.card-section {
     flex-direction: column;
-    align-items: center
+    align-items: center;
   }
-  .item-img{
+  .item-img {
     max-width: 300px;
   }
   h3.item-title {
     text-align: center;
     font: 1.8rem;
-    border-bottom:1px solid #3f51b5;
+    border-bottom: 1px solid #3f51b5;
   }
 }
