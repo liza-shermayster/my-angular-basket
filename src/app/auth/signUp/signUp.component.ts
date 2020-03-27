@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
       this.signUpForm.controls.email.hasError('email') ? 'Not a valid email' :
         '';
   }
-  onSignUp(signUpForm: FormGroup) {
+  onSignUp() {
     this.authService
       .createUser(this.signUpForm.value.email, this.signUpForm.value.password)
       .subscribe(response => {
