@@ -31,7 +31,7 @@ export class AuthService {
 
   createUser(email: string, password: string): Observable<any> {
     const authData: AuthData = { email: email, password: password };
-    return this.http.post('http://localhost:3000/api/user/signup', authData)
+    return this.http.post('user/signup', authData)
       .pipe(
         tap(({ token }) => {
           this.token = token;
@@ -48,7 +48,7 @@ export class AuthService {
     const authData: AuthData = { email: email, password: password };
     return this.http.
       post<{ token: string, user: string }>
-      ("http://localhost:3000/api/user/login", authData)
+      ("user/login", authData)
       .pipe(
         tap(({ token, user }) => {
           this.token = token;

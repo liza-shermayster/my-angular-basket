@@ -9,6 +9,6 @@ export class ContactService {
   constructor(private http: HttpClient) { }
 
   createDataContact(contact) {
-    return this.http.post('http://localhost:3000/api/contact', contact);
+    return this.http.post('contact', contact);
   }
 }
