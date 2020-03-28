@@ -9,6 +9,6 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   createOrderOnService(order) {
-    return this.http.post('http://localhost:3000/api/order/order', order);
+    return this.http.post('order/order', order);
   }
 }

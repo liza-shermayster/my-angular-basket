@@ -28,6 +28,7 @@ import { ItemCardComponent } from './menu/item-card/item-card.component';
 import { MenuComponent } from './menu/menu.component';
 import { SearchPipe } from './menu/search.pipe';
 import { OrderComponent } from './order/order.component';
+import { BaseUrlInterceptor } from './base-url.interceptor';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,10 @@ import { OrderComponent } from './order/order.component';
 
 
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

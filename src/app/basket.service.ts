@@ -20,7 +20,7 @@ export class BasketService {
   }
 
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:3000/api/menu')
+    this.http.get('menu')
       .pipe(
         map(this.transformResponseToMenuItems)
       )
